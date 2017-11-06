@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAddressTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_addressId}" for="addressId" />
+                    <h:inputText id="addressId" value="#{addressController.selected.addressId}" title="#{bundle.CreateAddressTitle_addressId}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_addressId}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{addressController.selected.type}" title="#{bundle.CreateAddressTitle_type}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_type}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_country}" for="country" />
+                    <h:inputText id="country" value="#{addressController.selected.country}" title="#{bundle.CreateAddressTitle_country}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_country}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_city}" for="city" />
+                    <h:inputText id="city" value="#{addressController.selected.city}" title="#{bundle.CreateAddressTitle_city}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_city}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_zipcode}" for="zipcode" />
+                    <h:inputText id="zipcode" value="#{addressController.selected.zipcode}" title="#{bundle.CreateAddressTitle_zipcode}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_zipcode}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_street}" for="street" />
+                    <h:inputText id="street" value="#{addressController.selected.street}" title="#{bundle.CreateAddressTitle_street}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_street}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_houseNumber}" for="houseNumber" />
+                    <h:inputText id="houseNumber" value="#{addressController.selected.houseNumber}" title="#{bundle.CreateAddressTitle_houseNumber}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_houseNumber}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_comment}" for="comment" />
+                    <h:inputText id="comment" value="#{addressController.selected.comment}" title="#{bundle.CreateAddressTitle_comment}" />
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_customerId}" for="customerId" />
+                    <h:selectOneMenu id="customerId" value="#{addressController.selected.customerId}" title="#{bundle.CreateAddressTitle_customerId}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_customerId}">
+                        <f:selectItems value="#{customerController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{addressController.create}" value="#{bundle.CreateAddressSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{addressController.prepareList}" value="#{bundle.CreateAddressShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAddressIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
