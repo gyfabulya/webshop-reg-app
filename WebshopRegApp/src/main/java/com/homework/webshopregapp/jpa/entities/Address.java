@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +44,8 @@ public class Address implements Serializable {
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private AddressType type;       
     
     @Basic(optional = false)
     @NotNull
@@ -89,7 +92,7 @@ public class Address implements Serializable {
         this.addressId = addressId;
     }
 
-    public Address(Long addressId, String type, String country, String city, String zipcode, String street, String houseNumber) {
+    public Address(Long addressId, AddressType type, String country, String city, String zipcode, String street, String houseNumber) {
         this.addressId = addressId;
         this.type = type;
         this.country = country;
@@ -107,11 +110,11 @@ public class Address implements Serializable {
         this.addressId = addressId;
     }
 
-    public String getType() {
+    public AddressType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(AddressType type) {
         this.type = type;
     }
 
