@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.homework.webshopregapp.jpa.entities;
 
 import java.io.Serializable;
@@ -19,10 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author f
- */
+
 @Entity
 @Table(name = "address")
 @NamedQueries({
@@ -36,45 +29,55 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Address.findByHouseNumber", query = "SELECT a FROM Address a WHERE a.houseNumber = :houseNumber"),
     @NamedQuery(name = "Address.findByComment", query = "SELECT a FROM Address a WHERE a.comment = :comment")})
 public class Address implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "address_id")
     private Long addressId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "country")
     private String country;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "city")
     private String city;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "zipcode")
     private String zipcode;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "street")
     private String street;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "house_number")
     private String houseNumber;
+    
     @Size(max = 400)
     @Column(name = "comment")
     private String comment;
+    
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @ManyToOne(optional = false)
     private Customer customerId;
