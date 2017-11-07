@@ -5,26 +5,57 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 <f:view>
-    <h1>Registration</h1>
+    <h1><h:outputText value="#{bundle.RegistrationTitle}"></h:outputText></h1>
     <hr/>        
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">                                        
+                <h:panelGrid columns="2">                           
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{customerController.selected.name}" title="#{bundle.CreateCustomerTitle_name}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_name}"/>
+                    <h:inputText id="name" value="#{registrationController.customer.name}" title="#{bundle.CreateCustomerTitle_name}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_phone}" for="phone" />
-                    <h:inputText id="phone" value="#{customerController.selected.phone}" title="#{bundle.CreateCustomerTitle_phone}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_phone}"/>
+                    <h:inputText id="phone" value="#{registrationController.customer.phone}" title="#{bundle.CreateCustomerTitle_phone}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_phone}"/>
                     <h:outputLabel value="#{bundle.CreateCustomerLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.CreateCustomerTitle_email}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_email}"/>                                                            
-                                        
+                    <h:inputText id="email" value="#{registrationController.customer.email}" title="#{bundle.CreateCustomerTitle_email}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_email}"/>        
+                </h:panelGrid>   
+                <br />
+                <h:outputText value="#{bundle.ShippingAddress}"></h:outputText>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_country}" for="shippingCountry" />
+                    <h:inputText id="shippingCountry" value="#{registrationController.shippingAddress.country}" title="#{bundle.CreateAddressLabel_country}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_country}"/>                    
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_city}" for="shippingCity" />
+                    <h:inputText id="shippingCity" value="#{registrationController.shippingAddress.city}" title="#{bundle.CreateAddressLabel_city}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_city}"/>                                        
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_zipcode}" for="shippingZipcode" />
+                    <h:inputText id="shippingZipcode" value="#{registrationController.shippingAddress.zipcode}" title="#{bundle.CreateAddressLabel_zipcode}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_zipcode}"/>                    
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_street}" for="shippingStreet" />
+                    <h:inputText id="shippingStreet" value="#{registrationController.shippingAddress.street}" title="#{bundle.CreateAddressLabel_street}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_street}"/>                       
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_houseNumber}" for="shippingHouseNumber" />
+                    <h:inputText id="shippingHouseNumber" value="#{registrationController.shippingAddress.houseNumber}" title="#{bundle.CreateAddressLabel_houseNumber}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_houseNumber}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_comment}" for="shippingComment" />
+                    <h:inputText id="shippingComment" value="#{registrationController.shippingAddress.comment}" title="#{bundle.CreateAddressLabel_comment}" />
+                </h:panelGrid>                     
+                <br />
+                <h:outputText value="#{bundle.BillingAddress}"></h:outputText>
+                <h:panelGrid columns="2">     
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_country}" for="billingCountry" />
+                    <h:inputText id="billingCountry" value="#{registrationController.billingAddress.country}" title="#{bundle.CreateAddressLabel_country}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_country}"/>                    
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_city}" for="billingCity" />
+                    <h:inputText id="billingCity" value="#{registrationController.billingAddress.city}" title="#{bundle.CreateAddressLabel_city}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_city}"/>                                        
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_zipcode}" for="billingZipcode" />
+                    <h:inputText id="billingZipcode" value="#{registrationController.billingAddress.zipcode}" title="#{bundle.CreateAddressLabel_zipcode}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_zipcode}"/>                    
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_street}" for="billingStreet" />
+                    <h:inputText id="billingStreet" value="#{registrationController.billingAddress.street}" title="#{bundle.CreateAddressLabel_street}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_street}"/>                       
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_houseNumber}" for="billingHouseNumber" />
+                    <h:inputText id="billingHouseNumber" value="#{registrationController.billingAddress.houseNumber}" title="#{bundle.CreateAddressLabel_houseNumber}" required="true" requiredMessage="#{bundle.CreateAddressRequiredMessage_houseNumber}"/>
+                    <h:outputLabel value="#{bundle.CreateAddressLabel_comment}" for="billingComment" />
+                    <h:inputText id="billingComment" value="#{registrationController.billingAddress.comment}" title="#{bundle.CreateAddressLabel_comment}" />                                        
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{customerController.create}" value="#{bundle.CreateCustomerSaveLink}" />
+                <!-- <h:commandLink action="#{registrationController.registration()}" value="#{bundle.CreateCustomerSaveLink}" /> -->
+                <h:commandButton action="#{registrationController.registration()}" value="#{bundle.CreateCustomerSaveLink}"/>
                 <br />
-                <br />                
-                
+                <br />                                
             </h:form>
 </f:view>
 </html>

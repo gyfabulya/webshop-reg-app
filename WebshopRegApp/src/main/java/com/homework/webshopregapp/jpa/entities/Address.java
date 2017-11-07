@@ -41,8 +41,7 @@ public class Address implements Serializable {
     private Long addressId;
     
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @NotNull   
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private AddressType type;       
