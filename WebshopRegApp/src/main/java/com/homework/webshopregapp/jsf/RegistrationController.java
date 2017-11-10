@@ -9,8 +9,6 @@ import com.homework.webshopregapp.jsf.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 
@@ -27,7 +25,6 @@ public class RegistrationController implements Serializable {
 
     @EJB
     private com.homework.webshopregapp.jpa.session.AddressFacade ejbAddressFacade;    
-
     
     public RegistrationController() {
     }
@@ -80,18 +77,25 @@ public class RegistrationController implements Serializable {
             */
             
             getCustomerFacade().create(customer);
-            if (customer != null) {
+            if (customer.getCustomerId() != null) {
+                
+                //create Billing address of Customer
                 billingAddress.setCustomerId(customer);
-                shippingAddress.setCustomerId(customer);
                 getAddressFacade().create(billingAddress);
+                
+                //create Shipping address of Customer              
+                shippingAddress.setCustomerId(customer);                
                 getAddressFacade().create(shippingAddress);
             } 
                         
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources//Bundle").getString("CustomerCreated"));
             return prepareCreate();
+            
         } catch (Exception e) {
+            
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources//Bundle").getString("PersistenceErrorOccured"));
             return null;
+            
         }
     }    
     
