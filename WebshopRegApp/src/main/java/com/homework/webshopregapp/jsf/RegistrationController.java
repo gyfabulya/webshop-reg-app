@@ -5,11 +5,13 @@ import com.homework.webshopregapp.jpa.entities.AddressType;
 import com.homework.webshopregapp.jpa.entities.Customer;
 import com.homework.webshopregapp.jpa.session.AddressFacade;
 import com.homework.webshopregapp.jpa.session.CustomerFacade;
+import com.homework.webshopregapp.jpa.session.LocationService;
 import com.homework.webshopregapp.jsf.util.JsfUtil;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 
@@ -20,12 +22,16 @@ public class RegistrationController implements Serializable {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
+    private List<String> countries;
     
     @EJB
-    private com.homework.webshopregapp.jpa.session.CustomerFacade ejbCustomerFacade; 
+    private CustomerFacade ejbCustomerFacade; 
 
     @EJB
-    private com.homework.webshopregapp.jpa.session.AddressFacade ejbAddressFacade;    
+    private AddressFacade ejbAddressFacade;    
+    
+    @EJB
+    private LocationService ejbLocationService;
     
     
     public RegistrationController() {
@@ -61,7 +67,20 @@ public class RegistrationController implements Serializable {
     private AddressFacade getAddressFacade() {
         return ejbAddressFacade;
     }
-
+    
+    public LocationService getEjbLocationService() {
+        return ejbLocationService;
+    }
+        
+    public List<String> getCountries() {
+        return countries;
+    }
+    
+    @PostConstruct
+    public void init() {
+        countries = ejbLocationService.getCountries();
+    }     
+    
     public String prepareCreate() {
         customer = new Customer();
         return "Create";
