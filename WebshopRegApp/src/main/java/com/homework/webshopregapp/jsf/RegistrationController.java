@@ -11,9 +11,10 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 
 @Named(value = "registrationController")
-@SessionScoped
+@RequestScoped
 public class RegistrationController implements Serializable {
     
     private Customer customer;
@@ -25,6 +26,7 @@ public class RegistrationController implements Serializable {
 
     @EJB
     private com.homework.webshopregapp.jpa.session.AddressFacade ejbAddressFacade;    
+    
     
     public RegistrationController() {
     }
