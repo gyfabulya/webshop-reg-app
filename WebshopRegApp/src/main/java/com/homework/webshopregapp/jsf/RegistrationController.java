@@ -11,13 +11,17 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
 @Named(value = "registrationController")
-@RequestScoped
+@SessionScoped
 public class RegistrationController implements Serializable {
+    
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class.getName());   
     
     private Customer customer;
     private Address shippingAddress;
@@ -87,24 +91,29 @@ public class RegistrationController implements Serializable {
     }    
     
     public String registration() {
-        try {      
-            
-            getCustomerFacade().create(customer);
-            if (customer.getCustomerId() != null) {                
+        try {     
+            //create Customer
+            getCustomerFacade().create(customer);                        
+            LOGGER.log( Level.FINE, "Customer registered customer_id: {0}",  customer.getCustomerId());
+            if (customer.getCustomerId() != null) {   
+
                 //create Billing address of Customer
                 billingAddress.setCustomerId(customer);
                 getAddressFacade().create(billingAddress);
-                
+                LOGGER.log( Level.INFO, "Billing address address_id {0}",  billingAddress.getAddressId() );
+                          
                 //create Shipping address of Customer              
                 shippingAddress.setCustomerId(customer);                
                 getAddressFacade().create(shippingAddress);
+                LOGGER.log( Level.INFO, "Shipping address address_id {0}",  billingAddress.getAddressId() );
+                                
             } 
-                        
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources//Bundle").getString("CustomerCreated"));
             return prepareCreate();
-            
+                         
         } catch (Exception e) {
-            
+            LOGGER.log( Level.WARNING, e.toString(), e );
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources//Bundle").getString("PersistenceErrorOccured"));
             return null;
             
