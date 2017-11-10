@@ -6,8 +6,8 @@ import com.homework.webshopregapp.jpa.entities.Customer;
 import com.homework.webshopregapp.jpa.session.AddressFacade;
 import com.homework.webshopregapp.jpa.session.CustomerFacade;
 import com.homework.webshopregapp.jsf.util.JsfUtil;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -66,19 +66,10 @@ public class RegistrationController implements Serializable {
     }    
     
     public String registration() {
-        try {            
-            /*
-            List<Address> addressList = new ArrayList<Address>();
-            addressList.add(billingAddress);
-            
-            customer.setAddressCollection(addressList);
+        try {      
             
             getCustomerFacade().create(customer);
-            */
-            
-            getCustomerFacade().create(customer);
-            if (customer.getCustomerId() != null) {
-                
+            if (customer.getCustomerId() != null) {                
                 //create Billing address of Customer
                 billingAddress.setCustomerId(customer);
                 getAddressFacade().create(billingAddress);
